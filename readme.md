@@ -18,6 +18,9 @@ require following line in  your composer ```require``` secion :
 
 #### Features
 
+- Automatically converts ``` $model->database_date_field ``` to jalali (persian) date by adding ```jalali_``` to the begining of the property : ```$model->jalali_database_date_field```.
+- Automatically adds jalali date fields to model's ```toArray```, ```__toString```, ```toJson``` methods. useful when you return models in your controllers for json responses.
+- Can alter the prefix ( ```jalali_``` ) by adding ```getJalaliPrefix()``` method in the model.
 
 
 #### Usage
@@ -30,7 +33,7 @@ you can easily use the following trait in your eloquent models :
 
 ``` 
 
-After using the trait by adding you can use persian dates with the following convention:
+After using the trait by adding ```jalali_``` to begining of the date attribute, you can use persian dates with the following convention:
 
 ```php
 
