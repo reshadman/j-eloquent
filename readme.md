@@ -1,5 +1,5 @@
 ### j-Eloquent
-Convert Eloquen model date attributes (created_at , ...) to Jalali (Persian) dates on the fly. ```$model->created_at``` can be converted to persian with ```$model->jalali_created_at```.
+Convert eloquent model date attributes (```created_at``` , ...) to jalali (persian) dates on the fly. ```php $model->created_at ``` can be converted to persian with ```$model->jalali_created_at```.
 
 #### Installation
 
