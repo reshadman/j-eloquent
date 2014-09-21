@@ -15,7 +15,7 @@
     ],
 	"autoload": {
         "psr-4": {
-            "Bigsinoos\\JEloqeunt\\": "src/"}
+            "Bigsinoos\\JEloquent\\": "src/"}
     },
     "minimum-stability": "stable"
 }
