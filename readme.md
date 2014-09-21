@@ -15,6 +15,7 @@ require following line in  your composer ```require``` secion :
 
 ```
 
+
 #### Features
 
 
@@ -23,25 +24,38 @@ require following line in  your composer ```require``` secion :
 
 you can easily use the following trait in your eloquent models :
 
-```Bigsinoos\JEloquent\PersianDateTrait``` 
+```php
+
+	Bigsinoos\JEloquent\PersianDateTrait
+
+``` 
 
 After using the trait by adding you can use persian dates with the following convention:
-```
+
+```php
+
 	//automatically converts $model->created_at to persian date
 	// by adding 'jalali_' to the begining of the date attribute :
 	$model->created_at => $model->jalali_created_at ;
+
 ```
+
 Example :
 
+
 ```php
+
 	class AdminLogs extends Eloquent {
 
 		use Bigsinoos\JEloquent\PersianDateTrait;
 
 	}
 
+
 ```
+
 Now you can easily convert any date to jalali dates with putting ```jalali_``` in the begining of the date attribute
+
 
 #### Other date attributes
 
@@ -49,7 +63,9 @@ Laravel treats date attributes as ```Carbon``` object. if you have other date fi
 
 After adding your date attribute you can use it like ```$model->jalali_user_deactivation_date``` .
 
+
 ### In Action
+
 
 ```php
 
