@@ -1,23 +1,23 @@
 ### j-Eloquent
-Convert eloquent model date attributes (```created_at``` , ...) to jalali (persian) dates on the fly. ```php $model->created_at ``` can be converted to persian with ```$model->jalali_created_at```.
+Convert eloquent model date attributes (```created_at``` , ...) to jalali (persian) dates on the fly. ```$model->created_at ``` can be converted to persian with ```$model->jalali_created_at```.
 
 #### Installation
 
 require following line in  your composer ```require``` secion : 
 
 
-```
+```javascript
+
 	"require" : {
 			// Other dependecies ,
 			"bigsinoos/j-eloquent" : "dev-master"
 	}
+
 ```
 
 #### Features
 
-	- Automatically converts ``` $mode->database_date_field ``` to jalali (persian) date by adding ```jalali_``` to the begining of the propert : ```$model->jalali_database_date_field```
-	- Automatically adds jalali date fields to model's ```toArray```, ```__toString```, ```toJson``` methods. useful when you return models in your controllers for json responses.
-	- Can alter the prefix ( ```jalali_``` ) by adding ```getJalaliPrefix()``` method in the model.
+
 
 #### Usage
 
