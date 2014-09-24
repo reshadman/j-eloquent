@@ -12,6 +12,13 @@ trait PersianDateTrait {
      */
     protected  $jalaliPrefix = "jalali_";
 
+    /**
+     * Date format for jalali dates
+     *
+     * @var string
+     */
+    protected $jalaliDateFormat = 'y/m/d';
+
 
     /**
      * Convert Gregorian date to Jalali date
@@ -19,8 +26,9 @@ trait PersianDateTrait {
      * @param string $what
      * @param string $format
      */
-    public function convertToPersian($what = 'created_at', $format = 'y/m/d')
+    public function convertToPersian($what = 'created_at', $format = null)
     {
+        $format = is_null($format) ? $this->getJalaliFormat() : $format;
         return jDate::forge($this->$what)->format($format);
     }
 
@@ -64,5 +72,25 @@ trait PersianDateTrait {
     protected function getJalaliPrefix()
     {
         return $this->jalaliPrefix;
+    }
+
+    /**
+     * Get jalali format
+     *
+     * @return string
+     */
+    protected function getJalaliFormat()
+    {
+        return $this->jalaliDataFormat;
+    }
+
+    /**
+     * Set jalali format
+     *
+     * @return $this
+     */
+    public function setJalaliFormat($format)
+    {
+        $this->jalaliDateFormat = $format; return $this;
     }
 } 
