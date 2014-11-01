@@ -81,7 +81,7 @@ trait PersianDateTrait {
      */
     protected function getJalaliFormat()
     {
-        return $this->jalaliDataFormat;
+        return $this->jalaliDateFormat;
     }
 
     /**
