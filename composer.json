@@ -16,5 +16,5 @@
 	"autoload": {
         "psr-4": {
             "Bigsinoos\\JEloquent\\": "src/"}
-    }
+    } 
 }
