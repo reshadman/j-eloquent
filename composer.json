@@ -3,7 +3,7 @@
     "description": "Convert eloquent date attributes to  jalali (Persian) dates on the fly. (supports model propery access, toJson, toString and toArray).",
     "keywords": ["laravel", "database", "sql", "orm", "persian", "jalali", "date"],
     "require": {
-        "illuminate/database": "4.*",
+        "illuminate/database": "5.*",
         "miladr/jalali": "dev-master"
     },
     "license": "GPL",
@@ -16,6 +16,5 @@
 	"autoload": {
         "psr-4": {
             "Bigsinoos\\JEloquent\\": "src/"}
-    },
-    "minimum-stability": "stable"
+    }
 }
