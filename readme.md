@@ -1,8 +1,7 @@
-### j-Eloquent
-Convert eloquent model date attributes (```created_at``` , ...) to jalali (persian) dates on the fly. ```$model->created_at ``` can be converted to persian with ```$model->jalali_created_at```.
+### What is j-Eloquent?
+Thanks to Laravel, Django and Rails we all know that convention over configuration (CoC) makes the development more funny. So suppose that you want to convert the Gregorian date attributes of your ```Eloquent``` models to Jalali (persian) dates, in this case ```j-Eloquent``` helps you to convert them conventionally, for example when you access a property named ```$model->jalali_created_at``` on your model, the ```PersianDateTrait``` detects the convention automatically and tries to convert ```created_at``` property of your model if it is a date attribute. This is also true for ```$model->toJson();``` and ```$model->toArray();``` fields.
 
 #### Installation
-
 require following line in  your composer ```require``` secion : 
 
 
@@ -10,7 +9,7 @@ require following line in  your composer ```require``` secion :
 
 	"require" : {
 			// Other dependecies ,
-			"bigsinoos/j-eloquent" : "dev-master"
+			"bigsinoos/j-eloquent" : "dev-master" // "
 	}
 
 ```
@@ -18,78 +17,87 @@ require following line in  your composer ```require``` secion :
 
 #### Features
 
-- Automatically converts ``` $model->database_date_field ``` to jalali (persian) date by adding ```jalali_``` to the begining of the property : ```$model->jalali_database_date_field```.
-- Automatically adds jalali date fields to model's ```toArray```, ```__toString```, ```toJson``` methods. useful when you return models in your controllers for json responses.
-- Can alter the prefix ( ```jalali_``` ) by adding ```getJalaliPrefix()``` method in the model.
+- Coneventionally converts Eloquent model date attributes to Jalali date when the original date attribute is accessed prefixed by a string like ```jalali_```.
+- Automatically converts date attributes to Jalali dates when model's ```toArrayl```, ```__toString();``` and ```toJson``` are called.
+- Custom date formats can be set for dates.
 
+
+#### Documentation
+
+##### The ```PersianDateTrait``` :
+By using ```\Bigsinoos\JEloquent\PersianDateTrait``` trait in your models you can enable the plugin : 
+```php
+<?php
+
+class Role extends \Eloquent {
+    use \Bigsinoos\JEloquent\PersianDateTrait;
+    protected $table = 'roles';
+}
+```
 
 #### Usage
-
-you can easily use the following trait in your eloquent models :
-
-```php
-
-	Bigsinoos\JEloquent\PersianDateTrait
-
-``` 
-
-After using the trait by adding ```jalali_``` to begining of the date attribute, you can use persian dates with the following convention:
+By default you can access your eloquent date attributes in jalali date by adding a ```jalali_``` substring to the begining of your original attribute like ```jalali_created_at``` :
 
 ```php
-
-	//automatically converts $model->created_at to persian date
-	// by adding 'jalali_' to the begining of the date attribute :
-	$model->created_at => $model->jalali_created_at ;
-
+    $userPremiumRole = Auth::user()->roles()->where('type', 'premium');
+    $userPremiumRole->create_at; // 2014/12/30 22:12:34
+    $userPremiumRole->jalali_created_at; // 93/09/08
 ```
 
-Example :
-
-
-```php
-
-	class AdminLogs extends Eloquent {
-
-		use Bigsinoos\JEloquent\PersianDateTrait;
-
-	}
-
-
-```
-
-Now you can easily convert any date to jalali dates with putting ```jalali_``` in the begining of the date attribute
-
-
-#### Other date attributes
-
-Laravel treats date attributes as ```Carbon``` object. if you have other date fields (like ```user_deactivation_date```) Eloquent lets you add them to model's date attributes. read the instructions in [Official documentaion](http://laravel.com/docs/eloquent#date-mutators)
-
-After adding your date attribute you can use it like ```$model->jalali_user_deactivation_date``` .
-
-
-### In Action
-
+##### Changing ```jalali_``` prefix
+You can change the jalali date convention prefix with overriding ```$model->setJalaliFormat($format)``` and ```$model->getJalaliFormat();``` or by overrriding ```$model->jalaliDateFormat``` property on your model class :
 
 ```php
 
-class Role extends Eloquent {
+class Role extends \Eloquent {
 
-	use Bigsinoos\JEloquent\PersianDateTrait;
+    use \Bigsinoos\JEloquent\PersianDateTrait;
 
-	public function getDates ()
-	{
-		return ['created_at', 'updated_at', 'expiration_date'];
-	}
+    protected $jalaliDateFormat = 'l j F Y H:i';
 }
 
-$role = Role::find(1);
+# or
 
-print $role->jalali_expiration_date ; // (string) 93/06/30
+class Role extends \Eloquent {
+    
+    use \Bigsinoos\JEloquent\PersianDateTrait;
+    
+    public function setJalaliFormat($format){
+        // do custom things here
+        $this->jalaliDateFormat = $format; return $this;
+    }
+    
+    protected function getJalaliFormat()
+    {
+        // return any format you want
+        return 'l j F Y H:i';
+    }
 
-print $role->expiration_date; // (string) 2014/09/21 12:00:00
-
-print $role->toJson(); // adds 'jalali_expiration_date' along with 'expiration_date'
-
-print $role->toArray(); // add 'jalali_expiration_date' key to the generated array through magic methods.
+}
 
 ```
+
+##### Custom date attributes : 
+You can tell Eloquent that which one of your fields are date attributes like created_at and updated_at, then Eloquent treats them like ```Carbon``` objects you define multiple date attributes like this :
+
+```php
+
+Class Role extends \Eloquent {
+    
+    use \Bigsinoos\JEloquent\PersianDateTrait;
+    
+    /**
+    * Add this method to customize your date attributes
+    *
+    * @return array
+    */
+    protected function getDates()
+    {
+        return ['created_at', 'updated_at', 'expired_at'];
+    }
+    
+}
+```
+When using the above trait all of the fields that are treated like date objects by Laravel will be available for conventional converting. They will be also added to model's ```toJson()``` , ```toArray();``` and ```__toString();``` methods.
+
+
