@@ -9,7 +9,7 @@ require following line in  your composer ```require``` secion :
 
 	"require" : {
 			// Other dependecies ,
-			"bigsinoos/j-eloquent" : "dev-master" // "
+			"bigsinoos/j-eloquent" : "dev-master" // Laravel 5 , "1.0" for Laravel 4
 	}
 
 ```
