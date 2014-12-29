@@ -100,4 +100,15 @@ Class Role extends \Eloquent {
 ```
 When using the above trait all of the fields that are treated like date objects by Laravel will be available for conventional converting. They will be also added to model's ```toJson()``` , ```toArray();``` and ```__toString();``` methods.
 
+##### Converter helper method
+
+The ```$model->convertToPersian($attribute, $format);``` method allowes you to normally convert one of your fields, from Gregorian date to Jalali date :
+
+```php
+
+$user = Auth::user();
+$user->convertToPersian('created_at', 'y/m/d'); // 93/09/08
+
+```
+
 
