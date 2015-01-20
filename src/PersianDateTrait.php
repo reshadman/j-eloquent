@@ -29,6 +29,11 @@ trait PersianDateTrait {
     public function convertToPersian($what = 'created_at', $format = null)
     {
         $format = is_null($format) ? $this->getJalaliFormat() : $format;
+        
+        if (is_null($this->$what)) {
+            return null;
+        }
+        
         return jDate::forge($this->$what)->format($format);
     }
 
