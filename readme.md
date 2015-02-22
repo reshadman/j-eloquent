@@ -14,6 +14,10 @@ require following line in  your composer ```require``` secion :
 
 ```
 
+#### Requirement
+
+this package requires : [miladr/jalali](https://github.com/miladr/jalali)
+
 
 #### Features
 
