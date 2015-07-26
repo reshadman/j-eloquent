@@ -4,7 +4,7 @@
     "keywords": ["laravel", "database", "sql", "orm", "persian", "jalali", "date"],
     "require": {
         "illuminate/database": "4.*",
-        "miladr/jalali": "dev-master"
+        "miladr/jalali": "0.0.*"
     },
     "license": "GPL",
     "authors": [
@@ -16,6 +16,5 @@
 	"autoload": {
         "psr-4": {
             "Bigsinoos\\JEloquent\\": "src/"}
-    },
-    "minimum-stability": "stable"
+    }
 }
