@@ -4,7 +4,7 @@
     "keywords": ["laravel", "database", "sql", "orm", "persian", "jalali", "date"],
     "require": {
         "illuminate/database": "5.*",
-        "miladr/jalali": "dev-master"
+        "miladr/jalali": "0.*"
     },
     "license": "GPL",
     "authors": [
