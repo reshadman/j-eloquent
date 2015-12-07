@@ -4,7 +4,14 @@ use Illuminate\Support\Str;
 use Miladr\Jalali\jDate;
 
 trait PersianDateTrait {
-
+    
+    /**
+     * Indicates that dates are appendded by default or no
+     * 
+     * @return bool
+     */
+    protected $appendsJalaliByDefault = true;
+    
     /**
      * Prefix for getting jalali dates "{prefix}_{date_attribute}_{suffix}
      *
@@ -45,6 +52,11 @@ trait PersianDateTrait {
     public function toArray()
     {
         $arr = parent::toArray();
+        
+        if (!$this->appendsJalaliByDefault()) {
+            return $arr;
+        }
+        
         foreach($this->getDates() as $date){
             $key = "{$this->getJalaliPrefix()}{$date}";
             $arr[$key] = $this->convertToPersian($date);
@@ -97,5 +109,21 @@ trait PersianDateTrait {
     public function setJalaliFormat($format)
     {
         $this->jalaliDateFormat = $format; return $this;
+    }
+    
+    /**
+     * Appends dates by default
+     * 
+     * @return bool
+     */
+    protected function appendsJalaliByDefault()
+    {
+        return $this->appendsJalaliByDefault;
+    }
+    
+    public function doNotAppendJalaliByDefault()
+    {
+        $this->appendsJalaliByDefault = false;
+        return $this;
     }
 } 
