@@ -6,13 +6,6 @@ use Miladr\Jalali\jDate;
 trait PersianDateTrait {
     
     /**
-     * Indicates that dates are appendded by default or no
-     * 
-     * @return bool
-     */
-    protected $appendsJalaliByDefault = true;
-    
-    /**
      * Prefix for getting jalali dates "{prefix}_{date_attribute}_{suffix}
      *
      * @var string
@@ -118,7 +111,11 @@ trait PersianDateTrait {
      */
     protected function appendsJalaliByDefault()
     {
-        return $this->appendsJalaliByDefault;
+        if (isset($this->appendsJalaliByDefault)) {
+            return (bool)$this->appendsJalaliByDefault;
+        }
+
+        return true;
     }
     
     public function doNotAppendJalaliByDefault()
