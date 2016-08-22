@@ -106,8 +106,8 @@ trait PersianDateTrait {
      */
     protected function appendsJalaliByDefault()
     {
-        if (isset($this->appendsJalaliByDefault)) {
-            return (bool)$this->appendsJalaliByDefault;
+        if (isset($this->appendsJalaliByDefaults)) {
+            return (bool)$this->appendsJalaliByDefaults;
         }
 
         return true;
@@ -120,7 +120,7 @@ trait PersianDateTrait {
      */
     public function doNotAppendJalaliByDefault()
     {
-        $this->appendsJalaliByDefault = false;
+        $this->appendsJalaliByDefaults = false;
         return $this;
     }
 } 
