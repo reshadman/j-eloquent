@@ -1,3 +1,6 @@
+### Deprecation Notice
+For newer versions of Laravel just use the simple attribute casting functionality which is a really nicer approach.
+
 ### What is j-Eloquent?
 Thanks to Laravel, Django and Rails we all know that convention over configuration (CoC) makes the development more funny. So suppose that you want to convert the Gregorian date attributes of your ```Eloquent``` models to Jalali (persian) dates, in this case ```j-Eloquent``` helps you to convert them conventionally, for example when you access a property named ```$model->jalali_created_at``` on your model, the ```PersianDateTrait``` detects the convention automatically and tries to convert ```created_at``` property of your model if it is a date attribute. This is also true for ```$model->toJson();``` and ```$model->toArray();``` fields.
 
